@@ -13,3 +13,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: gray;
 }
+
+.user-card-hover:hover {
+  background-color: #9ca3af !important;
+  cursor: pointer;
+  transition: .3s;
+}
