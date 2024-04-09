@@ -2,34 +2,7 @@
   <p class="text-2xl font-semibold">Telefones:</p>
   <app-phone-list [userPhoneList]="user?.phoneList"/>
   <p class="text-2xl font-semibold">Endereços:</p>
-  <div class="p-4 grid sm:grid-cols-2 lg:grid-cols-6">
-    <app-user-info-item title="Tipo" text="Residencial" />
-    <app-user-info-item title="Rua" text="Rua de Tal" />
-    <app-user-info-item title="Complemento" text="Próximo ao parque" />
-    <app-user-info-item title="ComplemenPaísto" text="Brazil" />
-    <app-user-info-item title="Estado" text="São Paulo" />
-    <app-user-info-item title="Cidade" text="Ribeirão Preto" />
-  </div>
 
-  <hr class="block lg:hidden" />
+  <app-address-list [userAddressList]="user?.addressList"/>
 
-  <div class="p-4 grid sm:grid-cols-2 lg:grid-cols-6">
-    <app-user-info-item title="Tipo" text="Residencial" />
-    <app-user-info-item title="Rua" text="Rua de Tal" />
-    <app-user-info-item title="Complemento" text="Próximo ao parque" />
-    <app-user-info-item title="ComplemenPaísto" text="Brazil" />
-    <app-user-info-item title="Estado" text="São Paulo" />
-    <app-user-info-item title="Cidade" text="Ribeirão Preto" />
-  </div>
-
-  <hr class="block lg:hidden" />
-
-  <div class="p-4 grid sm:grid-cols-2 lg:grid-cols-6">
-    <app-user-info-item title="Tipo" text="Residencial" />
-    <app-user-info-item title="Rua" text="Rua de Tal" />
-    <app-user-info-item title="Complemento" text="Próximo ao parque" />
-    <app-user-info-item title="ComplemenPaísto" text="Brazil" />
-    <app-user-info-item title="Estado" text="São Paulo" />
-    <app-user-info-item title="Cidade" text="Ribeirão Preto" />
-  </div>
 </div>

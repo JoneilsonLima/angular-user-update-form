@@ -39,8 +39,6 @@ export class PhoneListComponent implements OnChanges {
           phoneNumber: phoneFound ? this.formatPhoneNumber(phoneFound) : '-',
         });
       });
-
-    console.log(this.phoneListToDisplay);
   }
 
   formatPhoneNumber(phone: IPhone) {
