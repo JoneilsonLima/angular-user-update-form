@@ -2,6 +2,8 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { PhoneList } from '../../../../types/phone-list';
 import { PhoneTypeEnum } from '../../../../enums/phone-type.enum';
 import { IPhone } from '../../../../interfaces/user/phone.interface';
+import { IPhoneToDisplay } from '../../../../interfaces/phone-to-display.interface';
+import { phoneTypeDescriptionMap } from '../../../../utils/phone-type-description-map';
 
 @Component({
   selector: 'app-phone-list',
@@ -11,7 +13,7 @@ import { IPhone } from '../../../../interfaces/user/phone.interface';
 export class PhoneListComponent implements OnChanges {
   @Input({ required: true }) userPhoneList: PhoneList | undefined = [];
 
-  public phoneListToDisplay: any[] = [];
+  public phoneListToDisplay: IPhoneToDisplay[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
     const PHONE_LIST_LOADED = Array.isArray(
@@ -24,12 +26,6 @@ export class PhoneListComponent implements OnChanges {
   }
   preparePhoneListToDisplay() {
     this.phoneListToDisplay = [];
-
-    const phoneTypeDescriptionMap: { [key in PhoneTypeEnum]: string } = {
-      [PhoneTypeEnum.RESIDENTIAL]: 'Residencial',
-      [PhoneTypeEnum.MOBILE]: 'Celular',
-      [PhoneTypeEnum.EMERGENCY]: 'Emergência',
-    };
 
     Object.keys(phoneTypeDescriptionMap)
       .map(Number)
