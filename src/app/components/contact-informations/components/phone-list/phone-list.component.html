@@ -1,0 +1,5 @@
+<div class="p-4 lg:grid-cols-3 grid gap-4">
+  @for (phone of userPhoneList; track $index) {
+  <app-user-info-item [title]="phone?.type?.toString()" [text]="phone.number" />
+  }
+</div>
