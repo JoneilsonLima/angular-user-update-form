@@ -1,15 +1,31 @@
-@for(dependente of dependentsList; track $index) {
-  <div>
-    <p class="text-2xl font-semibold">Dependentes:</p>
-    <div class="grid sm:grid-cols-3">
-      <app-user-info-item [title]="dependente.name" text="Fulano" />
-      <app-user-info-item [title]="dependente.age.toString()" text="20" />
-      <app-user-info-item [title]="dependente.document.toString()" text="123" />
-    </div>
+<div class="p-4">
+  <p class="text-2xl font-semibold">Dependentes:</p>
 
-    <hr class="block sm:hidden" />
+  @if(!dependentsList?.length) {
+    <ng-container>
+      <div>
+        <p class="text-lg">O usuário não possui dependentes.</p>
+      </div>
+    </ng-container>
+  } @else {
 
-  </div>
-}
+    @for(dependente of dependentsList; track $index) {
+      <div>
+        <div class="grid sm:grid-cols-3">
+          <app-user-info-item [title]="dependente.name" text="Fulano" />
+          <app-user-info-item [title]="dependente.age.toString()" text="20" />
+          <app-user-info-item [title]="dependente.document.toString()" text="123" />
+        </div>
+
+        <hr class="block sm:hidden" />
+
+      </div>
+    }
+  }
+
+
+</div>
+
+
 
 
