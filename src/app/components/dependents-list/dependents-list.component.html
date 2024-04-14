@@ -12,9 +12,9 @@
     @for(dependente of dependentsList; track $index) {
       <div>
         <div class="grid sm:grid-cols-3">
-          <app-user-info-item [title]="dependente.name" text="Fulano" />
-          <app-user-info-item [title]="dependente.age.toString()" text="20" />
-          <app-user-info-item [title]="dependente.document.toString()" text="123" />
+          <app-user-info-item title="Nome" [text]="dependente.name" />
+          <app-user-info-item title="Idade" [text]="dependente.age.toString()" />
+          <app-user-info-item title="Documento" [text]="dependente.document | cpf : true" />
         </div>
 
         <hr class="block sm:hidden" />
