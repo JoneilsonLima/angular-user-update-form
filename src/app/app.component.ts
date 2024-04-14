@@ -5,6 +5,7 @@ import { CitiesService } from './services/cities.service';
 import { UsersService } from './services/users.service';
 import { UsersListResponse } from './types/users-list-response';
 import { take } from 'rxjs';
+import { IUser } from './interfaces/user/user.interface';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,11 @@ import { take } from 'rxjs';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
+  public userSelectedIndex!: number | undefined;
+  public userSelected: IUser = {} as IUser;
+
   public usersList: UsersListResponse = [];
-  public currentTabIndex: number = 2;
+  public currentTabIndex: number = 0;
 
   constructor(
     private readonly _countriesService: CountriesService,
@@ -30,6 +34,16 @@ export class AppComponent implements OnInit {
     // this._citiesService.getCities('Brazil', 'Maranhão').subscribe((value: any) => console.log(value));
 
     this.getUsers();
+  }
+
+  onUserSelected(userIndex: number): void {
+    const userFound = this.usersList[userIndex];
+
+    if (userFound) {
+      this.userSelectedIndex = userIndex;
+      this.userSelected = structuredClone(userFound);
+      this.currentTabIndex = 0;
+    }
   }
 
   getUsers(): void {
