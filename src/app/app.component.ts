@@ -15,6 +15,7 @@ import { IUser } from './interfaces/user/user.interface';
 export class AppComponent implements OnInit {
   public userSelectedIndex!: number | undefined;
   public userSelected: IUser = {} as IUser;
+  public isInEditMode: boolean = false;
 
   public usersList: UsersListResponse = [];
   public currentTabIndex: number = 0;
@@ -34,6 +35,14 @@ export class AppComponent implements OnInit {
     // this._citiesService.getCities('Brazil', 'Maranhão').subscribe((value: any) => console.log(value));
 
     this.getUsers();
+  }
+
+  onEditButton(): void {
+    this.isInEditMode = true;
+  }
+
+  onCancelButton(): void {
+    this.isInEditMode = false;
   }
 
   onUserSelected(userIndex: number): void {
