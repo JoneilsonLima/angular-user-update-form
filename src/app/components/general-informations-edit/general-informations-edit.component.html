@@ -1,0 +1,42 @@
+<div class="p-4 grid gap-4">
+  <div class="grid lg:grid-cols-3 gap-4">
+    <mat-form-field class="w-full">
+      <mat-label>Nome:</mat-label>
+      <input matInput placeholder="Fulano da Silva" value="Fulano">
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Email:</mat-label>
+      <input matInput placeholder="fulano@gmail.com" value="fulano@gmail.com">
+    </mat-form-field>
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-4">
+    <mat-form-field class="example-full-width">
+      <mat-label>País:</mat-label>
+      <input type="text"
+             placeholder="Brazil"
+             matInput
+             [matAutocomplete]="autoCountry">
+      <mat-autocomplete #autoCountry="matAutocomplete">
+        @for (option of []; track option) {
+          <mat-option>{{ '' }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Estado:</mat-label>
+      <input type="text"
+             placeholder="São Paulo"
+             matInput
+             [matAutocomplete]="autoState">
+      <mat-autocomplete #autoState="matAutocomplete">
+        @for (option of []; track option) {
+          <mat-option>{{ '' }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-4"></div>
+</div>
