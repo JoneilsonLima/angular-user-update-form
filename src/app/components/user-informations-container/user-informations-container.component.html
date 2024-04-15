@@ -1,0 +1,13 @@
+<mat-tab-group [(selectedIndex)]="currentTabIndex">
+  <mat-tab label="Geral">
+    <app-general-informations [user]="userSelected" />
+  </mat-tab>
+  <mat-tab label="Contato">
+    <app-contact-informations [user]="userSelected" />
+  </mat-tab>
+  <mat-tab label="Dependente">
+    <app-dependents-list
+      [dependentsList]="userSelected?.dependentsList"
+    />
+  </mat-tab>
+</mat-tab-group>

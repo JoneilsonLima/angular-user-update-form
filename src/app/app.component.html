@@ -7,26 +7,19 @@
       />
 
       @if (userSelectedIndex !== undefined) {
-      <app-buttons-container
-        [isInEditMode]="isInEditMode"
-        (onCancelButton)="onCancelButton()"
-        (onEditButton)="onEditButton()"
-      />
+        <app-buttons-container
+          [isInEditMode]="isInEditMode"
+          (onCancelButton)="onCancelButton()"
+          (onEditButton)="onEditButton()"
+        />
 
-      } @if (userSelectedIndex !== undefined) {
-      <mat-tab-group [(selectedIndex)]="currentTabIndex">
-        <mat-tab label="Geral">
-          <app-general-informations [user]="usersList[userSelectedIndex]" />
-        </mat-tab>
-        <mat-tab label="Contato">
-          <app-contact-informations [user]="usersList[userSelectedIndex]" />
-        </mat-tab>
-        <mat-tab label="Dependente">
-          <app-dependents-list
-            [dependentsList]="usersList[userSelectedIndex].dependentsList"
-          />
-        </mat-tab>
-      </mat-tab-group>
+      }
+
+      @if (userSelectedIndex !== undefined) {
+        <app-user-informations-container
+          [isInEditMode]="isInEditMode"
+          [userSelected]="userSelected"
+        />
       }
     </mat-card-content>
   </mat-card>
