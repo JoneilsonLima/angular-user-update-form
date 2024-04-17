@@ -13,6 +13,6 @@ export class UserInformationsContainerComponent implements OnChanges {
   public currentTabIndex: number = 0;
 
   ngOnChanges(_: SimpleChanges): void {
-    this.currentTabIndex = 0;
+    this.currentTabIndex = 1;
   }
 }
