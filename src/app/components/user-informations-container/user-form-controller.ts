@@ -30,17 +30,34 @@ export class UserFormController {
   }
 
   fulfillUserForm(user: IUser) {
-    this.fulfillGeneralInformations(user);
-  }
+    this.resetUserForm();
 
-  private fulfillGeneralInformations(user: IUser) {
-    this.generalInformations?.patchValue(user);
+    this.fulfillGeneralInformations(user);
     this.fulfillPhoneList(user.phoneList);
     this.fulfillAddressList(user.addressList);
     this.fulfillDependentsList(user.dependentsList);
 
-    console.log(this.userForm);
+    console.log(this.userForm)
   }
+
+  private resetUserForm() {
+    this.userForm.reset();
+    this.generalInformations.reset();
+
+    this.phoneList.reset();
+    this.phoneList.clear();
+
+    this.addressList.reset();
+    this.addressList.clear();
+
+    this.dependentsList.reset();
+    this.dependentsList.clear();
+  }
+
+  private fulfillGeneralInformations(user: IUser) {
+    this.generalInformations?.patchValue(user);
+  }
+
   private fulfillDependentsList(userDependentsList: DependentsList) {
     userDependentsList.forEach((dependent) => {
       this.dependentsList.push(
