@@ -8,6 +8,7 @@ import { DependentsList } from "../../types/dependents-list";
 export class UserFormController {
   public userForm!: FormGroup;
   private _fb = inject(FormBuilder);
+  private emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   constructor() {
     this.createUserForm();
@@ -102,7 +103,7 @@ export class UserFormController {
     this.userForm = this._fb.group({
       generalInformations: this._fb.group({
         name: ['', Validators.required],
-        email: ['', Validators.required],
+        email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
         country: ['', Validators.required],
         state: ['', Validators.required],
         maritalStatus: [null, Validators.required],
