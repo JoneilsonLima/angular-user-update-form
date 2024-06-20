@@ -83,6 +83,8 @@
           matInput
           placeholder="R$5000,00"
           formControlName="monthlyIncome">
+
+          <mat-error>A renda mensal é obrigatória.</mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -90,10 +92,12 @@
         <input
           matInput
           [matDatepicker]="picker"
-          formControlName="birthDate">
+          formControlName="birthDate"
+          readonly>
         <mat-hint>DD/MM/AAAA</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error>A data de nascimento é obrigatória.</mat-error>
       </mat-form-field>
     </div>
   </ng-container>
