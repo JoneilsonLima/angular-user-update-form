@@ -1,5 +1,5 @@
 <div class="p-4 lg:grid-cols-3 grid gap-4">
   @for (phone of phoneListToDisplay; track $index) {
-    <app-user-info-item [title]="phone.type" [text]="phone.phoneNumber" />
+    <app-user-info-item [title]="phone.typeDescription" [text]="phone.phoneNumber" />
   }
 </div>

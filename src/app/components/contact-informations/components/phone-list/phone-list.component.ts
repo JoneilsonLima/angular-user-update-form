@@ -4,6 +4,7 @@ import { PhoneTypeEnum } from '../../../../enums/phone-type.enum';
 import { IPhone } from '../../../../interfaces/user/phone.interface';
 import { IPhoneToDisplay } from '../../../../interfaces/phone-to-display.interface';
 import { phoneTypeDescriptionMap } from '../../../../utils/phone-type-description-map';
+import { preparePhoneList } from '../../../../utils/prepare-phone-list';
 
 @Component({
   selector: 'app-phone-list',
@@ -27,18 +28,11 @@ export class PhoneListComponent implements OnChanges {
   preparePhoneListToDisplay() {
     this.phoneListToDisplay = [];
 
-    Object.keys(phoneTypeDescriptionMap)
-      .map(Number)
-      .forEach((phoneType: number) => {
-        const phoneFound = this.userPhoneList?.find(
-          (userPhone: IPhone) => userPhone.type === phoneType
-        );
+    const originalPhoneList = this.userPhoneList && this.userPhoneList.length > 0 ? this.userPhoneList : [];
 
-        this.phoneListToDisplay.push({
-          type: phoneTypeDescriptionMap[phoneType as PhoneTypeEnum],
-          phoneNumber: phoneFound ? this.formatPhoneNumber(phoneFound) : '-',
-        });
-      });
+    preparePhoneList(originalPhoneList, (phone) => {
+      this.phoneListToDisplay.push(phone);
+    })
   }
 
   formatPhoneNumber(phone: IPhone) {
