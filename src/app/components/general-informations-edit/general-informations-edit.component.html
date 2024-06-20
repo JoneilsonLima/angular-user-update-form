@@ -34,9 +34,9 @@
                matInput
                [matAutocomplete]="autoCountry"
                formControlName="country">
-        <mat-autocomplete #autoCountry="matAutocomplete">
-          @for (option of []; track option) {
-            <mat-option>{{ '' }}</mat-option>
+        <mat-autocomplete #autoCountry="matAutocomplete" (optionSelected)="onCountrySelected($event)">
+          @for (country of countriesListFiltered; track country) {
+            <mat-option [value]="country.name ">{{ country.name }}</mat-option>
           }
         </mat-autocomplete>
       </mat-form-field>
