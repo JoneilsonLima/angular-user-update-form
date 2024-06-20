@@ -72,7 +72,14 @@
 
       <mat-form-field class="w-full">
         <mat-label>Renda Mensal:</mat-label>
+        @if(monthlyIncome.value) {
+          <span matTextPrefix="">R$</span>
+        }
         <input
+          #monthlyIncome
+          mask="separator.2"
+          thousandSeparator="."
+          decimalSeparator=","
           matInput
           placeholder="R$5000,00"
           formControlName="monthlyIncome">
