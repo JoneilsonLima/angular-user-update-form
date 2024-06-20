@@ -3,7 +3,9 @@
     <app-general-informations [user]="userSelected" />
     <app-general-informations-edit
       [userForm]="userForm"
-      [countriesList]="countriesList"/>
+      [countriesList]="countriesList"
+      [statesList]="statesList"
+      (onCountrySelected)="onCountrySelected($event)"/>
   </mat-tab>
   <mat-tab label="Contato">
     <app-contact-informations [user]="userSelected" />

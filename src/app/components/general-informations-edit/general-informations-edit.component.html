@@ -48,9 +48,9 @@
                matInput
                [matAutocomplete]="autoState"
                formControlName="state">
-        <mat-autocomplete #autoState="matAutocomplete">
-          @for (option of []; track option) {
-            <mat-option>{{ '' }}</mat-option>
+        <mat-autocomplete #autoState="matAutocomplete" (optionSelected)="onStateSelected($event)">
+          @for (state of statesListFiltered; track state) {
+            <mat-option [value]="state.name">{{ state.name }}</mat-option>
           }
         </mat-autocomplete>
       </mat-form-field>
