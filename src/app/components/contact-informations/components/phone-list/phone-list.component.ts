@@ -30,7 +30,7 @@ export class PhoneListComponent implements OnChanges {
 
     const originalPhoneList = this.userPhoneList && this.userPhoneList.length > 0 ? this.userPhoneList : [];
 
-    preparePhoneList(originalPhoneList, (phone) => {
+    preparePhoneList(originalPhoneList, true, (phone) => {
       this.phoneListToDisplay.push(phone);
     })
   }
