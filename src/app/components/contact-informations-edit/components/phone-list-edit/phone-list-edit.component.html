@@ -12,7 +12,7 @@
           <input
             matInput
             placeholder="+55 11 1234-1234"
-            [mask]="getPhoneMask(phoneList.value[i].type)"
+            [mask]="phoneList.value[i].type | phoneMask"
             formControlName="number">
         </mat-form-field>
       }
