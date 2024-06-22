@@ -17,4 +17,6 @@ Este aplicativo permite a atualização dos dados dos usuários, permite realiza
 - `Códigos Reutilizáveis em Utils`: Utilização de módulos Utils para armazenar códigos reutilizáveis, promovendo a organização e a reutilização de funcionalidades.
 - `Enums`: Criação de enums para representar constantes e melhorar a legibilidade e manutenibilidade do código.
 - `Máscaras de Entrada com ngx-mask`: Utiliza a biblioteca ngx-mask para aplicar máscaras de entrada em campos de formulário, como CPF, telefones, entre outros, garantindo que os dados sejam inseridos em um formato específico e padronizado.
+- `API CountriesNow`: O projeto consome a API <a href="https://countriesnow.space/"/>CountriesNow</a> para obter dados relacionados a países, como lista de países e suas cidades.
+
 
