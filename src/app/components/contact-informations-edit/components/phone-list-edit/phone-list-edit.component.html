@@ -6,7 +6,7 @@
 
     <ng-container formArrayName="phoneList">
 
-      @for (control of phoneList.controls; track control; let i = $index) {
+      @for (phone of phoneList.controls; track phone; let i = $index) {
         <mat-form-field class="w-full" [formGroupName]="i">
           <mat-label>{{phoneList.value[i].typeDescription}}:</mat-label>
           <input
@@ -14,6 +14,14 @@
             [placeholder]="phoneList.value[i].type | phonePlaceholder"
             [mask]="phoneList.value[i].type | phoneMask"
             formControlName="number">
+
+            @if (phone.get('number')?.hasError('required')) {
+              <mat-error>O Telefone é obrigatório.</mat-error>
+            }
+
+            @if (phone.get('number')?.hasError('mask')) {
+              <mat-error>O Telefone é inválido.</mat-error>
+            }
         </mat-form-field>
       }
     </ng-container>
