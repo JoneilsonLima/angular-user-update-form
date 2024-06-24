@@ -20,3 +20,26 @@ Este aplicativo permite a atualização dos dados dos usuários, permite realiza
 - `API CountriesNow`: O projeto consome a API <a href="https://countriesnow.space/"/>CountriesNow</a> para obter dados relacionados a países, como lista de países e suas cidades.
 
 
+## ⚙️ Como Executar
+
+Para executar a aplicação localmente, siga os passos abaixo:
+
+1. Clone este repositório:
+
+```bash
+  git clone https://github.com/JoneilsonLima/angular-user-update-form.git
+  cd reactive-forms
+
+```
+
+2. Instale as dependências
+
+```bash
+  npm install
+```
+
+3. Inicie a aplicação
+
+```bash
+  ng serve
+```
