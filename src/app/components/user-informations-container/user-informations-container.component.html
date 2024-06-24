@@ -21,13 +21,18 @@
     }
   </mat-tab>
   <mat-tab label="Dependente">
-    <app-dependents-list
-      [dependentsList]="userSelected?.dependentsList"
-    />
-    <app-dependents-list-edit
-    [userForm]="userForm"
-    (onRemoveDependent)="removeDependent($event)"
-    (onAddDependent)="addDependent()"
-    />
+      @if (!isInEditMode) {
+        <app-dependents-list
+        [dependentsList]="userSelected?.dependentsList"
+      />
+    } @else {
+      <app-dependents-list-edit
+      [userForm]="userForm"
+      (onRemoveDependent)="removeDependent($event)"
+      (onAddDependent)="addDependent()"
+      />
+    }
+
+
   </mat-tab>
 </mat-tab-group>
