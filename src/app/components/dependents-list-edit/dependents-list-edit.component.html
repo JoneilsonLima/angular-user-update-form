@@ -15,16 +15,27 @@
         <mat-form-field class="w-full">
           <mat-label>Nome:</mat-label>
           <input matInput formControlName="name">
+          <mat-error>O Nome é obrigatório.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="w-full">
           <mat-label>Idade:</mat-label>
           <input matInput formControlName="age">
+          <mat-error>A Idade é obrigatória.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="w-full">
           <mat-label>Documento:</mat-label>
-          <input matInput formControlName="document">
+          <input matInput formControlName="document" mask="000.000.000-00">
+
+          @if(dependent.get('document')?.hasError('required')) {
+            <mat-error>O Documento é obrigatório.</mat-error>
+          }
+          @if(dependent.get('document')?.hasError('mask')) {
+
+            <mat-error>O Documento é inválido.</mat-error>
+          }
+
         </mat-form-field>
 
         <div class="flex items-baseline box-border pt-2 justify-center">
