@@ -13,9 +13,12 @@
 
   </mat-tab>
   <mat-tab label="Contato">
-    <app-contact-informations [user]="userSelected" />
-    <app-contact-informations-edit
-    [userForm]="userForm"/>
+    @if (!isInEditMode) {
+      <app-contact-informations [user]="userSelected" />
+    } @else {
+      <app-contact-informations-edit
+      [userForm]="userForm"/>
+    }
   </mat-tab>
   <mat-tab label="Dependente">
     <app-dependents-list
