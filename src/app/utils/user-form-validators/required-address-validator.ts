@@ -13,6 +13,7 @@ export const requiredAddressValidator: ValidatorFn = (control: AbstractControl):
     if (hasAnyText) {
       if (!control?.value) {
         control?.setErrors({requiredAddressControl: true})
+        control?.markAllAsTouched();
       } else {
         control?.setErrors(null)
       }
