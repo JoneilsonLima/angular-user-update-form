@@ -9,6 +9,7 @@ import { preparePhoneList } from "../../utils/prepare-phone-list";
 import { PhoneTypeEnum } from "../../enums/phone-type.enum";
 import { prepareAddressList } from "../../utils/prepare-address-list";
 import { requiredAddressValidator } from "../../utils/user-form-validators/required-address-validator";
+import { IDependent } from "../../interfaces/user/dependent.interface";
 
 export class UserFormController {
   public userForm!: FormGroup;
@@ -50,6 +51,26 @@ export class UserFormController {
     this.dependentsList.removeAt(dependentIndex)
   }
 
+  addDependent() {
+    this.dependentsList.push(this.createDependentGroup());
+  }
+
+  private createDependentGroup(dependent: IDependent | null = null) {
+    if (!dependent) {
+      return this._fb.group({
+        name: ['', Validators.required],
+        age: ['', Validators.required],
+        document: ['', Validators.required],
+      })
+    }
+
+    return this._fb.group({
+      name: [dependent.name, Validators.required],
+      age: [dependent.age, Validators.required],
+      document: [dependent.document, Validators.required],
+    })
+  }
+
   private resetUserForm() {
     this.userForm.reset();
     this.generalInformations.reset();
@@ -75,13 +96,7 @@ export class UserFormController {
 
   private fulfillDependentsList(userDependentsList: DependentsList) {
     userDependentsList.forEach((dependent) => {
-      this.dependentsList.push(
-        this._fb.group({
-          name: [dependent.name, Validators.required],
-          age: [dependent.age, Validators.required],
-          document: [dependent.document, Validators.required],
-        })
-      )
+      this.dependentsList.push(this.createDependentGroup(dependent));
     })
   }
 
