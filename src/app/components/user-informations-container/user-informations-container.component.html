@@ -25,7 +25,8 @@
       [dependentsList]="userSelected?.dependentsList"
     />
     <app-dependents-list-edit
-      [userForm]="userForm"
+    [userForm]="userForm"
+    (onRemoveDependent)="removeDependent($event)"
     />
   </mat-tab>
 </mat-tab-group>
