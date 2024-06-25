@@ -28,6 +28,7 @@ export class UserInformationsContainerComponent extends UserFormController imple
   }
 
   ngOnChanges(_: SimpleChanges): void {
+    console.log(this.isInEditMode)
     this.currentTabIndex = 0;
 
     if (this.userSelected) {
