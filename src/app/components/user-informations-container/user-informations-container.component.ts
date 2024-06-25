@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject } from '@angular/core';
 import { IUser } from '../../interfaces/user/user.interface';
 import { UserFormController } from './user-form-controller';
 import { CountriesService } from '../../services/countries.service';
-import { take } from 'rxjs';
+import { distinctUntilChanged, take } from 'rxjs';
 import { CountriesList } from '../../types/countries-list';
 import { StatesService } from '../../services/states.service';
 import { StatesList } from '../../types/states-list';
@@ -16,6 +16,8 @@ export class UserInformationsContainerComponent extends UserFormController imple
   @Input({ required: true }) userSelected: IUser | undefined = {} as IUser;
   @Input({ required: true }) isInEditMode: boolean = false;
 
+  @Output('onFormStatusChange') onFormStatusChangeEmitt = new EventEmitter<boolean>();
+
   private readonly _countriesService = inject(CountriesService);
   private readonly _statesService = inject(StatesService);
 
@@ -25,10 +27,11 @@ export class UserInformationsContainerComponent extends UserFormController imple
 
   ngOnInit(): void {
     this.getCountriesList();
+
+    this.onUserFormSatusChange();
   }
 
   ngOnChanges(_: SimpleChanges): void {
-    console.log(this.isInEditMode)
     this.currentTabIndex = 0;
 
     if (this.userSelected) {
@@ -38,11 +41,19 @@ export class UserInformationsContainerComponent extends UserFormController imple
     }
   }
 
-  onCountrySelected(countryName: string) {
+  onCountrySelected(countryName: string): void {
     this.getStatesList(countryName);
   }
 
-  private getStatesList(country: string) {
+  private onUserFormSatusChange(): void {
+    this.userForm.statusChanges
+    .pipe(
+      distinctUntilChanged()
+    )
+    .subscribe(() => this.onFormStatusChangeEmitt.emit(this.userForm.valid));
+  }
+
+  private getStatesList(country: string): void {
     this._statesService.getStates(country)
     .pipe(
       take(1)

@@ -10,6 +10,7 @@
       @if (userSelectedIndex !== undefined) {
         <app-buttons-container
           [isInEditMode]="isInEditMode"
+          [enableSaveButton]="enableSaveButton"
           (onCancelButton)="onCancelButton()"
           (onEditButton)="onEditButton()"
         />
@@ -20,6 +21,7 @@
         <app-user-informations-container
           [isInEditMode]="isInEditMode"
           [userSelected]="userSelected"
+          (onFormStatusChange)="onFormStatusChange($event)"
         />
       }
     </mat-card-content>

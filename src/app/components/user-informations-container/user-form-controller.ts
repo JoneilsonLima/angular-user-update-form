@@ -62,8 +62,6 @@ export class UserFormController {
 
     this.userForm.markAllAsTouched();
     this.userForm.updateValueAndValidity();
-
-    console.log(this.userForm)
   }
 
   removeDependent(dependentIndex: number) {
@@ -146,8 +144,6 @@ export class UserFormController {
         number: [phone.phoneNumber, phoneValidators]
       }))
     })
-
-    console.log(this.phoneList)
   }
 
   private createUserForm() {

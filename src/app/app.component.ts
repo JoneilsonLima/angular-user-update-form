@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   public userSelectedIndex!: number | undefined;
   public userSelected: IUser = {} as IUser;
   public isInEditMode: boolean = false;
+  public enableSaveButton: boolean = false;
 
   public usersList: UsersListResponse = [];
 
@@ -27,17 +28,15 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this._countriesService.getCountries().subscribe((value: any) => console.log(value));
-
-    // this._statesService.getStates('Brazil').subscribe((value: any) => console.log(value));
-
-    // this._citiesService.getCities('Brazil', 'Maranhão').subscribe((value: any) => console.log(value));
-
     this.getUsers();
   }
 
   onEditButton(): void {
     this.isInEditMode = true;
+  }
+
+  onFormStatusChange(formStatus: boolean) {
+    setTimeout(() =>  this.enableSaveButton = formStatus, 0);
   }
 
   onCancelButton(): void {
