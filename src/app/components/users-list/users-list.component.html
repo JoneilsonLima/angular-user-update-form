@@ -1,9 +1,14 @@
 <div class="grid sm:grid-cols-3 p-4 gap-4">
-  @for (user of usersList; track $index) {
+  @for (user of usersList; track user; let i = $index) {
   <mat-card
     class="user-card-hover"
-    (click)="onUserSelected($index)"
-    [ngClass]="{'user-selected': $index === userSelectedIndex}">
+    (click)="onUserSelected(i)"
+    [ngClass]="
+      {
+        'user-selected': i === userSelectedIndex,
+        'user-card-disabled': isInEditMode && userSelectedIndex !== i
+      }
+      ">
       <mat-card-header>
         <mat-card-title>{{ user.name }}</mat-card-title>
         <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>

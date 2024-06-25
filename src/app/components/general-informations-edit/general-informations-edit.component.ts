@@ -59,8 +59,8 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges{
   }
 
   private filteredStateList(searchTerm: string): void {
-    this.statesListFiltered = this.statesList.filter((state) => {
-      return state.name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase().trim());
+    this.statesListFiltered = this.statesList?.filter((state) => {
+      return state.name.toLocaleLowerCase().includes(searchTerm?.toLocaleLowerCase().trim());
     })
   }
 
@@ -69,8 +69,8 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges{
   }
 
   private filterCountriesList(searchTerm: string): void {
-    this.countriesListFiltered = this.countriesList.filter((country) => {
-      return country.name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase().trim());
+    this.countriesListFiltered = this.countriesList?.filter((country) => {
+      return country.name.toLocaleLowerCase().includes(searchTerm?.toLocaleLowerCase().trim());
     })
   }
 }

@@ -4,6 +4,7 @@
       <app-users-list
         (onUserSelected)="onUserSelected($event)"
         [usersList]="usersList"
+        [isInEditMode]="isInEditMode"
       />
 
       @if (userSelectedIndex !== undefined) {

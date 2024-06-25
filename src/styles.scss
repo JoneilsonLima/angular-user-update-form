@@ -20,3 +20,8 @@ body {
   cursor: pointer;
   transition: .3s;
 }
+
+.user-card-disabled {
+  background-color: #d6deeb !important;
+  cursor: not-allowed !important;
+}
