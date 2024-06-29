@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { IUser } from '../../interfaces/user/user.interface';
 import { UserFormController } from './user-form-controller';
 import { CountriesService } from '../../services/countries.service';
-import { distinctUntilChanged, take } from 'rxjs';
+import { distinctUntilChanged, filter, skip, take } from 'rxjs';
 import { CountriesList } from '../../types/countries-list';
 import { StatesService } from '../../services/states.service';
 import { StatesList } from '../../types/states-list';
@@ -54,7 +54,10 @@ export class UserInformationsContainerComponent extends UserFormController imple
 
   private onUserFormFirstChange(): void {
     this.userForm.valueChanges
-      .pipe(take(1))
+      .pipe(
+        filter(() => this.userForm.dirty),
+        take(1)
+      )
       .subscribe(() => this.onUserFormFirstChangeEmitt.emit());
   }
 

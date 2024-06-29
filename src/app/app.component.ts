@@ -6,6 +6,9 @@ import { UsersService } from './services/users.service';
 import { UsersListResponse } from './types/users-list-response';
 import { take } from 'rxjs';
 import { IUser } from './interfaces/user/user.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { IDialogConfirmationData } from './interfaces/dialog-confirmation-data.interface';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +25,8 @@ export class AppComponent implements OnInit {
   public usersList: UsersListResponse = [];
 
   constructor(
-    private readonly _countriesService: CountriesService,
-    private readonly _statesService: StatesService,
-    private readonly _citiesService: CitiesService,
     private readonly _usersService: UsersService,
+    private readonly _matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +46,25 @@ export class AppComponent implements OnInit {
   }
 
   onCancelButton(): void {
-    this.isInEditMode = false;
+    if (this.userFormUpdated) {
+      const dialogRef = this._matDialog.open(ConfirmationDialogComponent,
+        {
+          data: {
+            title: 'O Formulário foi alterado',
+            message: 'Deseja realmente cancelar as alterações feitas no formulário?'
+          }
+        }
+      );
+
+      dialogRef.afterClosed().subscribe((value: boolean) => {
+        if (!value) return;
+
+        this.userFormUpdated = false;
+        this.isInEditMode = false;
+      });
+    } else {
+      this.isInEditMode = false;
+    }
   }
 
   onUserSelected(userIndex: number): void {
