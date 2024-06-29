@@ -4,7 +4,7 @@ import { StatesService } from './services/states.service';
 import { CitiesService } from './services/cities.service';
 import { UsersService } from './services/users.service';
 import { UsersListResponse } from './types/users-list-response';
-import { take } from 'rxjs';
+import { retry, take } from 'rxjs';
 import { IUser } from './interfaces/user/user.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
@@ -13,7 +13,7 @@ import { IDialogConfirmationData } from './interfaces/dialog-confirmation-data.i
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   public isInEditMode: boolean = false;
@@ -33,12 +33,28 @@ export class AppComponent implements OnInit {
     this.getUsers();
   }
 
+  onSaveButton(): void {
+    const data: IDialogConfirmationData = {
+      title: 'Confirmar alteração de dados',
+      message: 'Deseja realmente salvar os valores alterados?',
+    };
+
+    this.openConfirmationDialog(data, (value: boolean) => {
+      if (!value) return;
+
+      this.saveUserInfos();
+
+      this.isInEditMode = false;
+      this.userFormUpdated = false;
+    })
+  }
+
   onEditButton(): void {
     this.isInEditMode = true;
   }
 
   onFormStatusChange(formStatus: boolean) {
-    setTimeout(() =>  this.enableSaveButton = formStatus, 0);
+    setTimeout(() => (this.enableSaveButton = formStatus), 0);
   }
 
   onUserFormFirstChange(): void {
@@ -47,16 +63,13 @@ export class AppComponent implements OnInit {
 
   onCancelButton(): void {
     if (this.userFormUpdated) {
-      const dialogRef = this._matDialog.open(ConfirmationDialogComponent,
-        {
-          data: {
-            title: 'O Formulário foi alterado',
-            message: 'Deseja realmente cancelar as alterações feitas no formulário?'
-          }
-        }
-      );
+      const data: IDialogConfirmationData = {
+        title: 'O Formulário foi alterado',
+        message:
+          'Deseja realmente cancelar as alterações feitas no formulário?',
+      };
 
-      dialogRef.afterClosed().subscribe((value: boolean) => {
+      this.openConfirmationDialog(data, (value: boolean) => {
         if (!value) return;
 
         this.userFormUpdated = false;
@@ -77,17 +90,31 @@ export class AppComponent implements OnInit {
   }
 
   getUsers(): void {
-    this._usersService.getUsers()
-    .pipe(
-      take(1)
-    )
-    .subscribe({
-      next: (users: UsersListResponse) => {
-        this.usersList = users;
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
+    this._usersService
+      .getUsers()
+      .pipe(take(1))
+      .subscribe({
+        next: (users: UsersListResponse) => {
+          this.usersList = users;
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+  }
+
+  private openConfirmationDialog(
+    data: IDialogConfirmationData,
+    callback: (value: boolean) => void
+  ): void {
+    const dialogRef = this._matDialog.open(ConfirmationDialogComponent, {
+      data
+    });
+
+    dialogRef.afterClosed().subscribe(callback);
+  }
+
+  private saveUserInfos(): void {
+    console.log('Alterações salvas!');
   }
 }
