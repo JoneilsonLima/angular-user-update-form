@@ -45,6 +45,10 @@ export class UserInformationsContainerComponent extends UserFormController imple
     this.getStatesList(countryName);
   }
 
+  mostrarForm(): void {
+    console.log(this.userForm);
+  }
+
   private onUserFormSatusChange(): void {
     this.userForm.statusChanges
     .pipe(
