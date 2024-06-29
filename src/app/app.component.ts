@@ -13,11 +13,12 @@ import { IUser } from './interfaces/user/user.interface';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  public userSelectedIndex!: number | undefined;
-  public userSelected: IUser = {} as IUser;
   public isInEditMode: boolean = false;
   public enableSaveButton: boolean = false;
+  public userFormUpdated: boolean = false;
 
+  public userSelectedIndex!: number | undefined;
+  public userSelected: IUser = {} as IUser;
   public usersList: UsersListResponse = [];
 
   constructor(
@@ -37,6 +38,10 @@ export class AppComponent implements OnInit {
 
   onFormStatusChange(formStatus: boolean) {
     setTimeout(() =>  this.enableSaveButton = formStatus, 0);
+  }
+
+  onUserFormFirstChange(): void {
+    this.userFormUpdated = true;
   }
 
   onCancelButton(): void {

@@ -17,6 +17,7 @@ export class UserInformationsContainerComponent extends UserFormController imple
   @Input({ required: true }) isInEditMode: boolean = false;
 
   @Output('onFormStatusChange') onFormStatusChangeEmitt = new EventEmitter<boolean>();
+  @Output('onUserFormFirstChange') onUserFormFirstChangeEmitt = new EventEmitter<void>();
 
   private readonly _countriesService = inject(CountriesService);
   private readonly _statesService = inject(StatesService);
@@ -37,6 +38,8 @@ export class UserInformationsContainerComponent extends UserFormController imple
     if (this.userSelected) {
       this.fulfillUserForm(this.userSelected);
 
+      this.onUserFormFirstChange();
+
       this.getStatesList(this.userSelected.country);
     }
   }
@@ -47,6 +50,12 @@ export class UserInformationsContainerComponent extends UserFormController imple
 
   mostrarForm(): void {
     console.log(this.userForm);
+  }
+
+  private onUserFormFirstChange(): void {
+    this.userForm.valueChanges
+      .pipe(take(1))
+      .subscribe(() => this.onUserFormFirstChangeEmitt.emit());
   }
 
   private onUserFormSatusChange(): void {

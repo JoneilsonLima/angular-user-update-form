@@ -51,7 +51,7 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges{
   }
 
   onStateSelected(event: MatAutocompleteSelectedEvent) {
-    console.log(event.option.value);
+  //  console.log(event.option.value);
   }
 
   private watchStateFormChangesAndFilter(): void {
