@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { IUser } from '../../interfaces/user/user.interface';
 import { UserFormController } from './user-form-controller';
 import { CountriesService } from '../../services/countries.service';
-import { distinctUntilChanged, filter, skip, take } from 'rxjs';
+import { Subscription, distinctUntilChanged, filter, skip, take } from 'rxjs';
 import { CountriesList } from '../../types/countries-list';
 import { StatesService } from '../../services/states.service';
 import { StatesList } from '../../types/states-list';
@@ -26,6 +26,8 @@ export class UserInformationsContainerComponent extends UserFormController imple
   public countriesList: CountriesList = [];
   public statesList: StatesList = [];
 
+  public userFormValueChangesSubs!: Subscription;
+
   ngOnInit(): void {
     this.getCountriesList();
 
@@ -36,6 +38,8 @@ export class UserInformationsContainerComponent extends UserFormController imple
     this.currentTabIndex = 0;
 
     if (this.userSelected) {
+      if (this.userFormValueChangesSubs) this.userFormValueChangesSubs.unsubscribe();
+
       this.fulfillUserForm(this.userSelected);
 
       this.onUserFormFirstChange();
@@ -53,7 +57,7 @@ export class UserInformationsContainerComponent extends UserFormController imple
   }
 
   private onUserFormFirstChange(): void {
-    this.userForm.valueChanges
+    this.userFormValueChangesSubs = this.userForm.valueChanges
       .pipe(
         filter(() => this.userForm.dirty),
         take(1)
