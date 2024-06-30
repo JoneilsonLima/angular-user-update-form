@@ -90,9 +90,9 @@ export class UserFormController {
     }
 
     return this._fb.group({
-      name: [dependent.name, Validators.required],
-      age: [dependent.age, Validators.required],
-      document: [dependent.document, Validators.required],
+      name: [dependent.name.toString(), Validators.required],
+      age: [dependent.age.toString(), Validators.required],
+      document: [dependent.document.toString(), Validators.required],
     })
   }
 
