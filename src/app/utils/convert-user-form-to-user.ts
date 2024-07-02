@@ -1,5 +1,6 @@
-import { IUserForm, IUserFormGeneralInformations, IUserFormPhone } from "../interfaces/user-form.interface";
+import { IUserForm, IUserFormAddress, IUserFormGeneralInformations, IUserFormPhone } from "../interfaces/user-form.interface";
 import { IUser } from "../interfaces/user/user.interface";
+import { AddressList } from "../types/address-list";
 import { PhoneList } from "../types/phone-list";
 import { convertDateObjToPtBrDate } from "./convert-date-obj-to-pt-br-date";
 
@@ -8,13 +9,13 @@ export const convertUserFormToUser = (userForm: IUserForm): IUser => {
 
   newUser = { ...convertGeneralInformation(userForm.generalInformations) }
   newUser.phoneList = [ ...convertPhoneList(userForm.contactInformations.phoneList) ]
+  newUser.addressList = [ ...converterAddressList(userForm.contactInformations.addressList) ]
 
   return newUser as IUser;
 };
 
 
-const convertGeneralInformation =
-    (generalInformations: IUserFormGeneralInformations): Partial<IUser> => {
+const convertGeneralInformation = (generalInformations: IUserFormGeneralInformations): Partial<IUser> => {
 
       return {
         name: generalInformations.name,
@@ -36,4 +37,17 @@ const convertPhoneList = (phoneList: IUserFormPhone[]): PhoneList => {
     number: phone.number.substring(4)
   }))
   return newUserPhoneList;
+}
+
+const converterAddressList = (addressList: IUserFormAddress[]): AddressList => {
+  const newUserAddressList: AddressList = addressList.map((address) => ({
+    type: address.type,
+    street: address.street,
+    complement: address.complement,
+    country: address.country,
+    state: address.state,
+    city: address.city,
+  }));
+
+  return newUserAddressList;
 }
