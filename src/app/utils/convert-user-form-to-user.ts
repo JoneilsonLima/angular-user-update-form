@@ -34,26 +34,28 @@ const convertGeneralInformation = (generalInformations: IUserFormGeneralInformat
 
 const convertPhoneList = (phoneList: IUserFormPhone[]): PhoneList => {
   const newUserPhoneList: PhoneList = phoneList
-  .map((phone) => ({
-    type: phone.type,
-    internationalCode: '+' + phone.number.substring(0, 2),
-    areaCode: phone.number.substring(2, 4),
-    number: formatNumber(phone.number.substring(4))
-  }))
-  .filter((phone) => phone.areaCode);
+    .map((phone) => ({
+      type: phone.type,
+      internationalCode: '+' + phone.number.substring(0, 2),
+      areaCode: phone.number.substring(2, 4),
+      number: formatNumber(phone.number.substring(4))
+    }))
+    .filter((phone) => phone.areaCode);
 
   return newUserPhoneList;
 }
 
 const converterAddressList = (addressList: IUserFormAddress[]): AddressList => {
-  const newUserAddressList: AddressList = addressList.map((address) => ({
-    type: address.type,
-    street: address.street,
-    complement: address.complement,
-    country: address.country,
-    state: address.state,
-    city: address.city,
-  }));
+  const newUserAddressList: AddressList = addressList
+    .map((address) => ({
+      type: address.type,
+      street: address.street,
+      complement: address.complement,
+      country: address.country,
+      state: address.state,
+      city: address.city,
+    }))
+    .filter((address) => address.street);
 
   return newUserAddressList;
 }
