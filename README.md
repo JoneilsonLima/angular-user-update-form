@@ -1,4 +1,4 @@
-# Projeto Formulário de Atualização de Usuários (Em desenvolvimento)
+# Projeto Formulário de Atualização de Usuários
 
 Este é um projeto de formulário de atualização de usuários desenvolvido com Angular 17, Tailwind CSS e Angular Material. O objetivo deste projeto é demonstrar o uso de vários conceitos avançados do Angular, incluindo requisições HTTP, formulário reativo, RxJS, Observables, além da aplicação de todas as boas práticas de criação de componentes reutilizáveis e utilização dos principais recursos do Angular, como criação de pipes, diretivas e códigos reutilizáveis.
 
