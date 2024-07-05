@@ -52,10 +52,6 @@ export class UserInformationsContainerComponent extends UserFormController imple
     this.getStatesList(countryName);
   }
 
-  mostrarForm(): void {
-    console.log(this.userForm);
-  }
-
   private onUserFormFirstChange(): void {
     this.userFormValueChangesSubs = this.userForm.valueChanges
       .pipe(
