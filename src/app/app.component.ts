@@ -120,20 +120,13 @@ export class AppComponent implements OnInit {
   }
 
   private saveUserInfos(): void {
-    const newUser: IUser = this.convertUserFormToUser()
+    const newUser: IUser = convertUserFormToUser(this._userFormRawValueService.userFormRawValue);
 
     this._updateUserService.updateUser(newUser).subscribe((newUserResponse: IUser) => {
       if (this.userSelectedIndex === undefined) return;
 
       this.usersList [this.userSelectedIndex] = newUserResponse;
+      this.userSelected = structuredClone(newUserResponse);
     })
-  }
-
-  private convertUserFormToUser(): IUser {
-    console.log(this._userFormRawValueService.userFormRawValue);
-
-    console.log(convertUserFormToUser(this._userFormRawValueService.userFormRawValue))
-
-    return {} as IUser;
   }
 }
