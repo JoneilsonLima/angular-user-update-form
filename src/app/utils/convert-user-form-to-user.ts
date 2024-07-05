@@ -1,3 +1,4 @@
+import { formatNumber } from './format-number';
 import { IUserForm, IUserFormAddress, IUserFormDependent, IUserFormGeneralInformations, IUserFormPhone } from "../interfaces/user-form.interface";
 import { IUser } from "../interfaces/user/user.interface";
 import { AddressList } from "../types/address-list";
@@ -34,9 +35,9 @@ const convertGeneralInformation = (generalInformations: IUserFormGeneralInformat
 const convertPhoneList = (phoneList: IUserFormPhone[]): PhoneList => {
   const newUserPhoneList: PhoneList = phoneList.map((phone) => ({
     type: phone.type,
-    internationalCode: phone.number.substring(0, 2),
+    internationalCode: '+' + phone.number.substring(0, 2),
     areaCode: phone.number.substring(2, 4),
-    number: phone.number.substring(4)
+    number: formatNumber(phone.number.substring(4))
   }))
   return newUserPhoneList;
 }

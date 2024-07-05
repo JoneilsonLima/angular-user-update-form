@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CountriesService } from './services/countries.service';
-import { StatesService } from './services/states.service';
-import { CitiesService } from './services/cities.service';
 import { UsersService } from './services/users.service';
 import { UsersListResponse } from './types/users-list-response';
-import { retry, take } from 'rxjs';
+import { take } from 'rxjs';
 import { IUser } from './interfaces/user/user.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
